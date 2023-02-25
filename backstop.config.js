@@ -1,6 +1,8 @@
-const gitSha = process.env.APP_GIT_SHA
+const referenceGitSha = process.env.APP_REFERENCE_GIT_SHA
+const currentGitSha = process.env.APP_CURRENT_GIT_SHA
 
-if (!gitSha) throw new Error('No GIT SHA provided for this commit.');
+if (!referenceGitSha) throw new Error('No reference GIT SHA provided.');
+if (!currentGitSha) throw new Error('No GIT SHA provided for this commit.');
 
 module.exports = {
   id: "backstop_default",
@@ -45,8 +47,8 @@ module.exports = {
     }
   ],
   paths: {
-    bitmaps_reference: "backstop_data/bitmaps_reference",
-    bitmaps_test: `backstop_data/bitmaps_test/${gitSha}`,
+    bitmaps_reference: `backstop_data/bitmaps_test/${referenceGitSha}`,
+    bitmaps_test: `backstop_data/bitmaps_test/${currentGitSha}`,
     engine_scripts: "backstop_data/engine_scripts",
     html_report: "backstop_data/html_report",
     ci_report: "backstop_data/ci_report"
